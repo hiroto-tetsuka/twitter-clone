@@ -6,8 +6,10 @@
 
     <div class="row">
         <div class="col-6">
+            
             {!! Form::model($task, ['route' => 'tasks.store']) !!}
 
+                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <div class="form-group">
                     {!! Form::label('status', 'ステータス:') !!}
                     {!! Form::text('status', null, ['class' => 'form-control']) !!}

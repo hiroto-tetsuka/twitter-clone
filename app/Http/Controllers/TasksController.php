@@ -16,12 +16,16 @@ class TasksController extends Controller
      
     public function index()
     {
-        
-        $tasks = Task::all();
-        
-        return view('tasks.index' , [
-            'tasks' => $tasks
-        ]);
+        $tasks = [];
+        if (\Auth::check()) { // 認証済みの場合
+            // 認証済みユーザを取得
+            $user = \Auth::user();
+            // ユーザの投稿の一覧を作成日時の降順で取得
+            // （後のChapterで他ユーザの投稿も取得するように変更しますが、現時点ではこのユーザの投稿のみ取得します）
+            $tasks = $user->tasklist()->orderBy('created_at', 'desc')->paginate(10);
+        }
+        // Welcomeビューでそれらを表示
+        return view('tasks.index', ["tasks" => $tasks]);
     }
 
     /**
@@ -32,9 +36,9 @@ class TasksController extends Controller
     public function create()
     {
         $task = new Task;
-        
+    
         return view('tasks.create' , [
-            'task' => $task,
+            'task' => $task
             ]);
     }
 
@@ -54,6 +58,7 @@ class TasksController extends Controller
         $task = new Task;
         $task->status = $request->status;
         $task->content = $request->content;
+        $task->user_id = $request->user_id;
         $task->save();
         
         return redirect('/');

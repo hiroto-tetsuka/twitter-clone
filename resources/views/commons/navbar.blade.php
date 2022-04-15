@@ -10,15 +10,25 @@
         <div class="collapse navbar-collapse" id="nav-bar">
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
-                {{-- メッセージ作成ページへのリンク --}}
-                <li class="nav-item">{!! link_to_route('tasks.create', '新規メッセージの投稿', [], ['class' => 'nav-link']) !!}</li>
-            </ul>
-            <ul class="navbar-nav">
-                {{-- ユーザ登録ページへのリンク --}}
-                <li>{!! link_to_route('signup.get', '登録', [], ['class' => 'nav-link']) !!}</li>
-                {{-- ログインページへのリンク --}}
-                <li class="nav-item"><a href="#" class="nav-link">ログイン</a></li>
-            </ul>
+                @if (Auth::check())
+                    {{-- ユーザ一覧ページへのリンク --}}
+                    <li class="nav-item">{!! link_to_route('tasks.index', 'Tasks', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            {{-- ユーザ詳細ページへのリンク --}}
+                            <li class="dropdown-item"><a href="#">My task</a></li>
+                            <li class="dropdown-divider"></li>
+                            {{-- ログアウトへのリンク --}}
+                            <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
+                        </ul>
+                    </li>
+                @else
+                    {{-- ユーザ登録ページへのリンク --}}
+                    <li class="nav-item">{!! link_to_route('signup.get', '登録', [], ['class' => 'nav-link']) !!}</li>
+                    {{-- ログインページへのリンク --}}
+                    <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
+                @endif
         </div>
     </nav>
 </header>
