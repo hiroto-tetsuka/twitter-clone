@@ -12,15 +12,14 @@
             <ul class="navbar-nav">
                 @if (Auth::check())
                     {{-- ユーザ一覧ページへのリンク --}}
-                    <li class="nav-item">{!! link_to_route('tasks.index', 'Tasks', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">{!! link_to_route('tasks.index', 'タスク一覧', [], ['class' => 'nav-link']) !!}</li>
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             {{-- ユーザ詳細ページへのリンク --}}
-                            <li class="dropdown-item"><a href="#">My task</a></li>
                             <li class="dropdown-divider"></li>
                             {{-- ログアウトへのリンク --}}
-                            <li class="dropdown-item">{!! link_to_route('logout.get', 'Logout') !!}</li>
+                            <li class="dropdown-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
                         </ul>
                     </li>
                 @else

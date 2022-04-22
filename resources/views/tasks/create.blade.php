@@ -11,7 +11,7 @@
 
                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                 <div class="form-group">
-                    {!! Form::label('status', 'ステータス:') !!}
+                    {!! Form::label('status', 'タイトル:') !!}
                     {!! Form::text('status', null, ['class' => 'form-control']) !!}
                 </div>
 
