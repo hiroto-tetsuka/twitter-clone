@@ -19,10 +19,15 @@
         </tr>
     </table>
 
-    {!! link_to_route('tasks.edit', 'このタスクを編集', ['task' => $task->id], ['class' => 'btn btn-light']) !!}
+    <form action="{{asset('/tasks/edit/'.$task->id)}}" method="get">
+        @csrf
+        <input type="submit" class="btn btn-light" name="{{$task->id}}" value="このタスクを編集">
+    </form>
 
-    {!! Form::model($task, ['route' => ['tasks.destroy', $task->id], 'method' => 'delete']) !!}
-        {!! Form::submit('削除', ['class' => 'btn btn-danger']) !!}
-    {!! Form::close() !!}
+
+    <form action="{{asset('/tasks/destroy/'.$task->id)}}" method="get">
+        @csrf
+        <input type="submit" class="btn btn-danger" name="{{$task->id}}" value="削除">
+    </form>
 
 @endsection
