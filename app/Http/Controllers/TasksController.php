@@ -110,7 +110,7 @@ class TasksController extends Controller
                 'task' => $task,
             ]);
         }else{
-            return redirect()->back();
+            return redirect('/');
         }
     }
     
@@ -150,7 +150,7 @@ class TasksController extends Controller
             $task->delete();
             return redirect('/');
         }else{
-            return redirect()->back();
+            return redirect('/');
         }
         
     }
